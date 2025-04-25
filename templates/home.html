@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mobile Price Range Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+        .container {
+            width: 60%;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            margin-top: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        h2 {
+            text-align: center;
+        }
+        .result {
+            background: #e2f0d9;
+            padding: 15px;
+            border-left: 5px solid #3c763d;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        /* New CSS for 2 inputs per row */
+        .input-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .input-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Predict Mobile Phone Price Range</h2>
+    <form method="POST" action="/predictdata">
+        <!-- First row with 2 inputs side by side -->
+        <div class="input-row">
+            <div class="input-group">
+                <label>Battery Power (mAh)</label>
+                <input type="number" name="battery_power" placeholder="e.g., 1500" required>
+            </div>
+
+            <div class="input-group">
+                <label>Bluetooth</label>
+                <select name="blue" required>
+                    <option value="">Select</option>
+                    <option value="1">Yes (1)</option>
+                    <option value="0">No (0)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Second row with 2 inputs side by side -->
+        <div class="input-row">
+            <div class="input-group">
+                <label>Clock Speed (GHz)</label>
+                <input type="number" step="0.1" name="clock_speed" placeholder="e.g., 1.5" required>
+            </div>
+
+            <div class="input-group">
+                <label>Dual SIM</label>
+                <select name="dual_sim" required>
+                    <option value="">Select</option>
+                    <option value="1">Yes (1)</option>
+                    <option value="0">No (0)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Continue this pattern for the rest of the inputs if needed -->
+
+        <label>Front Camera (MP)</label>
+        <input type="number" name="fc" placeholder="e.g., 8" required>
+
+        <label>4G Support</label>
+        <select name="four_g" required>
+            <option value="">Select</option>
+            <option value="1">Yes (1)</option>
+            <option value="0">No (0)</option>
+        </select>
+
+        <label>Internal Memory (GB)</label>
+        <input type="number" name="int_memory" placeholder="e.g., 32" required>
+
+        <label>Mobile Depth (cm)</label>
+        <input type="number" step="0.1" name="m_dep" placeholder="e.g., 0.6" required>
+
+        <label>Mobile Weight (g)</label>
+        <input type="number" name="mobile_wt" placeholder="e.g., 150" required>
+
+        <label>Number of Processor Cores</label>
+        <input type="number" name="n_cores" placeholder="e.g., 4" required>
+
+        <label>Primary Camera (MP)</label>
+        <input type="number" name="pc" placeholder="e.g., 12" required>
+
+        <label>Pixel Height</label>
+        <input type="number" name="px_height" placeholder="e.g., 1280" required>
+
+        <label>Pixel Width</label>
+        <input type="number" name="px_width" placeholder="e.g., 720" required>
+
+        <label>RAM (MB)</label>
+        <input type="number" name="ram" placeholder="e.g., 2048" required>
+
+        <label>Screen Height (cm)</label>
+        <input type="number" name="sc_h" placeholder="e.g., 12" required>
+
+        <label>Screen Width (cm)</label>
+        <input type="number" name="sc_w" placeholder="e.g., 6" required>
+
+        <label>Talk Time (hours)</label>
+        <input type="number" name="talk_time" placeholder="e.g., 20" required>
+
+        <label>3G Support</label>
+        <select name="three_g" required>
+            <option value="">Select</option>
+            <option value="1">Yes (1)</option>
+            <option value="0">No (0)</option>
+        </select>
+
+        <label>Touch Screen</label>
+        <select name="touch_screen" required>
+            <option value="">Select</option>
+            <option value="1">Yes (1)</option>
+            <option value="0">No (0)</option>
+        </select>
+
+        <label>WiFi Support</label>
+        <select name="wifi" required>
+            <option value="">Select</option>
+            <option value="1">Yes (1)</option>
+            <option value="0">No (0)</option>
+        </select>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if results is not none %}
+    <div class="result">
+        <h3>Predicted Price Range: {{ results }}</h3>
+        <p><strong>0</strong>: Low Cost, <strong>1</strong>: Medium Cost, <strong>2</strong>: High Cost, <strong>3</strong>: Very High Cost</p>
+    </div>
+    {% endif %}
+</div>
+</body>
+</html>
